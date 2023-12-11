@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+ll search(ll a[], ll l, ll r, ll gia_tri)
+{
+    if (a[l] > gia_tri)
+        return l - 1;
+    if (a[r] < gia_tri)
+        return r;
+    if (a[l] == gia_tri)
+        return l;
+    if (a[r] == gia_tri)
+        return r;
+    ll mid = (l + r)/2;
+    if (a[mid] == gia_tri)
+        return mid;
+    if (a[mid + 1] == gia_tri)
+        return mid + 1;
+    if (a[mid] < gia_tri && a[mid + 1] > gia_tri)
+        return mid;
+    if (a[mid] > gia_tri)
+        return search(a, l, mid, gia_tri);
+    if (a[mid] < gia_tri)
+        return search(a, mid, r, gia_tri);
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    ll a[25], n, i, k;
+    cin >> n >> k;
+    for (i = 1; i <= n; i++)
+        cin >> a[i];
+    cout << search(a, 1, n, k);
+}
